@@ -16,26 +16,26 @@ The [Simple JavaScript logging framework is available on GitHub](https://github.
 
 In Your HTML
 
-<script language="JavaScript" type="text/javascript" src="js/logging.js"></script>
+    <script language="JavaScript" type="text/javascript" src="js/logging.js"></script>
 
 In Your Javascript
 
-try {
-  // ...
-  log('value of foo: ' + foo);
-  //...
-  } catch(e) {
-    logError(e);
-  }
+    try {
+      // ...
+      log('value of foo: ' + foo);
+      //...
+    } catch(e) {
+      logError(e);
+    }
 
-  Options
+Options
 
-  // The log will no longer be created or displayed
-  loggingDisplay = false;
+    // The log will no longer be created or displayed
+    loggingDisplay = false;
 
-  // The log will start expanded
-  loggingStartExpanded = true;
+    // The log will start expanded
+    loggingStartExpanded = true;
 
-  // The location where javascript logging was unzipped to
-  // so that the CSS + additional javascript can be loaded
-  LOGGING_BASE = '/javascript-logging/';
+    // The location where javascript logging was unzipped to
+    // so that the CSS + additional javascript can be loaded
+    LOGGING_BASE = '/javascript-logging/';
