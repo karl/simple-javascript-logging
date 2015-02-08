@@ -1,3 +1,8 @@
+/*
+ * Add/Remove/Replace function original from the web.
+ * Can't remember which site I'm afraid :(
+ */
+
 var SEP = '(^|$| )';
 
 function hasClass(object, className) {
@@ -13,7 +18,7 @@ function addClass(o, cls) {
 
 function removeClass(o, cls) {
     var regex = new RegExp(SEP + cls + SEP);
-    o.className = o.className.replace(regex, "");
+    o.className = o.className.replace(regex, " ");
 }
 
 function replaceClass(o, ocls, ncls) {
@@ -34,4 +39,3 @@ function getElementsByClass(object, cls) {
 
    return classElements;
 }
-
