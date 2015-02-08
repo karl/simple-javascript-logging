@@ -1,13 +1,15 @@
 /*
-    Javascript Logging v1.1
-    -----------------------
+  Javascript Logging v1.1.01
+  -----------------------
 
-    Usage
+  Usage
 
-      In Your Javascript
+    In Your HTML
 
-      document.write('<script language="JavaScript" type="text/javascript" src="js/logging.js"></script>');
-      //...
+      <script language="JavaScript" type="text/javascript" src="js/logging.js"></script>
+
+    In Your Javascript
+
       try {
         // ...
         log('value of foo: ' + foo);
@@ -16,13 +18,14 @@
         logError(e);
       }
 
-    Options
+  Options
 
-      loggingDisplay = false;        // The log will no longer be created or displayed
+    loggingDisplay = false;                   // The log will no longer be created or displayed
 
-      loggingStartExpanded = true;   // The log will start expanded
+    loggingStartExpanded = true;              // The log will start expanded
 
-      LOGGING_BASE = '/javascript-logging/';    // The location where javascript logging was unzipped to, so that the CSS + additional javascript can be loaded
+    LOGGING_BASE = '/javascript-logging/';    // The location where javascript logging was unzipped to
+                                              // so that the CSS + additional javascript can be loaded
 
 */
 
@@ -33,17 +36,17 @@ var loggingStartExpanded;
 var LOGGING_BASE = '';
 
 function initLogging(display) {
-   if (loggingDisplay == null) {
+  if (loggingDisplay == null) {
     loggingDisplay = display;
-   }
+  }
 
-   if (loggingDisplay && logging == null) {
-      logging = document.createElement('div');
-      logging.innerHTML = '<div id="logging-title" class="title"><span class="show-hide"><a id="show-logging" href="">[+]</a><a id="hide-logging" href="">[-]</a></span> Javascript Logging</div>';
-      loggingList = document.createElement('ul');
-      logging.appendChild(loggingList);
-     	log('logging initialisation');
-   }
+  if (loggingDisplay && logging == null) {
+    logging = document.createElement('div');
+  logging.innerHTML = '<div id="logging-title" class="title"><span class="show-hide"><a id="show-logging" href="">[+]</a><a id="hide-logging" href="">[-]</a></span> Javascript Logging</div>';
+  loggingList = document.createElement('ul');
+  logging.appendChild(loggingList);
+  log('logging initialisation');
+  }
 }
 
 function onloadLoggingInit() {
@@ -55,76 +58,74 @@ function onloadLoggingInit() {
     hideLogging = document.getElementById('hide-logging');
 
     hideLog();
-    if (!loggingStartExpanded) {
-      //showLog();
+    if (loggingStartExpanded) {
+      showLog();
     }
     log('logging initialisation completed');
   }
 }
 
 function showLog() {
-   removeClass(loggingList, 'hidden');
-   removeClass(hideLogging, 'hidden');
-   addClass(showLogging, 'hidden');
-   var title = document.getElementById('logging-title');
-   title.onclick = hideLog;
+  removeClass(loggingList, 'hidden');
+  removeClass(hideLogging, 'hidden');
+  addClass(showLogging, 'hidden');
+  var title = document.getElementById('logging-title');
+  title.onclick = hideLog;
 
-   return false;
+  return false;
 }
 
 function hideLog() {
-   addClass(loggingList, 'hidden');
-   addClass(hideLogging, 'hidden');
-   removeClass(showLogging, 'hidden');
-   var title = document.getElementById('logging-title');
-   title.onclick = showLog;
+  addClass(loggingList, 'hidden');
+  addClass(hideLogging, 'hidden');
+  removeClass(showLogging, 'hidden');
+  var title = document.getElementById('logging-title');
+  title.onclick = showLog;
 
-   return false;
+  return false;
 }
 
 function log(text) {
-   if (loggingDisplay) {
-      var loggingNode = document.createElement('li');
+  if (loggingDisplay) {
+    var loggingNode = document.createElement('li');
 
-      var internal =  document.createElement('pre');
-      internal.appendChild(document.createTextNode(text));
+    var internal =  document.createElement('pre');
+    internal.appendChild(document.createTextNode(text));
 
-      loggingNode.appendChild(internal);
-      loggingList.appendChild(loggingNode);
-   }
+    loggingNode.appendChild(internal);
+    loggingList.appendChild(loggingNode);
+  }
 }
 
 function logError(e) {
-    if (loggingDisplay) {
-        var loggingNode = document.createElement('li');
-        addClass(loggingNode, 'error');
+  if (loggingDisplay) {
+    var loggingNode = document.createElement('li');
+    addClass(loggingNode, 'error');
 
-        var date = new Date();
-        loggingNode.appendChild(document.createTextNode(e));
-        loggingList.appendChild(loggingNode);
-    }
-    showLog();
+    var date = new Date();
+    loggingNode.appendChild(document.createTextNode(e));
+    loggingList.appendChild(loggingNode);
+  }
+  showLog();
 }
 
 function logArray(ary) {
-    if (ary == null) {
-        log('empty array');
-        return;
-    }
+  if (ary == null) {
+    log('empty array');
+    return;
+  }
 
-    for (var ct1 = 0; ct1 < ary.length; ct1++) {
-        log(ary[ct1]);
-    }
+  for (var ct1 = 0; ct1 < ary.length; ct1++) {
+    log(ary[ct1]);
+  }
 }
 
 
-
 if (loggingDisplay == null) {
-    document.write('<script language="JavaScript" type="text/javascript" src="' + LOGGING_BASE + 'js/class.js"></script>');
-    document.write('<style type="text/css">@import "' + LOGGING_BASE + 'css/logging.css";</style>');
-    initLogging(true);
-    
-    
-    var loggingOldHandlingFunction = (window.onload != null) ? window.onload : function() {};
-    window.onload = function () { onloadLoggingInit(); loggingOldHandlingFunction(); };
+  document.write('<script language="JavaScript" type="text/javascript" src="' + LOGGING_BASE + 'js/class.js"></script>');
+  document.write('<style type="text/css">@import "' + LOGGING_BASE + 'css/logging.css";</style>');
+  initLogging(true);
+
+  var loggingOldHandlingFunction = (window.onload != null) ? window.onload : function() {};
+  window.onload = function () { onloadLoggingInit(); loggingOldHandlingFunction(); };
 }
